@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import './index.css';
@@ -16,6 +16,31 @@ ReactDOM.render((
             </Switch>
         </Router>
 
-), document.getElementById('root'));
+), document.getElementById('root'));*/
 
-registerServiceWorker();
+//registerServiceWorker();
+
+import { createStore } from 'redux';
+
+function playList(state = [], action) {
+    if (action.type === 'ADD_TRACK') {
+        return [
+            ...state,
+            action.payload
+        ];
+    }
+    return state;
+
+}
+
+
+const store = createStore(playList);
+
+console.log(store.getState());
+
+store.subscribe(() => {
+    console.log('subscribe', store.getState());
+})
+
+store.dispatch({type: 'ADD_TRACK', payload: 'Smell Like Teen Speret'});
+store.dispatch({type: 'ADD_TRACK', payload: 'Enter Sandman'});
