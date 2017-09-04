@@ -10,6 +10,7 @@ class Menu extends Component {
             <div>
                 <Link to="/"> Home</Link>
                 <Link to="/about"> About</Link>
+                <Link to="/books"> Books</Link>
 
             </div>
         );

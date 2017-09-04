@@ -2,7 +2,7 @@
  * Created by pathfinder on 02.09.17.
  */
 import React, {Component} from 'react';
-//import Menu from './Menu';
+import Menu from './Menu';
 import axios from 'axios';
 
 class BookList extends Component {
@@ -15,17 +15,9 @@ class BookList extends Component {
     }
 
 
-
-
     downloadBooks() {
-
-
         axios({
             method: 'post',
-            proxy: {
-                host: 'bookcase.loc',
-                port: 80,
-            },
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -44,18 +36,6 @@ class BookList extends Component {
 
         })
 
-
-
-        /*const instance = axios.create({
-            baseURL: 'http://bookcase.loc/qraphql',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            method: 'POST',
-        });*/
-
-
             .then(function (response) {
                 console.log(response);
             })
@@ -63,44 +43,18 @@ class BookList extends Component {
                 console.log(error);
             });
     }
-
-/*
-
-    downloadBooks() {
-
-        const instance = axios.create({
-            baseURL: 'http://bookcase.loc/',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-        });
-
-
-
-        instance.get('/graphql?query=query{books{title,author}}')
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
-
-
-*/
-
-
-
 
 
 
     render() {
         return (
             (
+                <div>
+                    <Menu/>
                 <form onSubmit={this.downloadBooks}>
-                    <button className="submitbBtn">Получить список</button>
+                    <button className="submitbBtn">Получить список (в консоль)</button>
                 </form>
+                </div>
             )
         )
     }
