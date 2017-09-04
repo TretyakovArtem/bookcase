@@ -7,15 +7,18 @@ import axios from 'axios';
 
 class BookList extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             books: []
         };
+
+        this.componentWillMount = this.componentWillMount.bind(this);
     }
 
 
-    downloadBooks() {
+    componentWillMount() {
+       
         axios({
             method: 'post',
             headers: {
@@ -29,19 +32,24 @@ class BookList extends Component {
                 {
                   books {
                     title,
-                    author
+                    author,
+                    id
                   }
                  }
             `,})
 
         })
 
-            .then(function (response) {
-                console.log(response);
+            .then(res => {
+                console.log(res.data.data.books);
+                const books = res.data.data.books;
+                console.log(books);
+                this.setState({ books });
             })
             .catch(function (error) {
                 console.log(error);
             });
+            console.log(this.state.books);
     }
 
 
@@ -51,9 +59,11 @@ class BookList extends Component {
             (
                 <div>
                     <Menu/>
-                <form onSubmit={this.downloadBooks}>
-                    <button className="submitbBtn">Получить список (в консоль)</button>
-                </form>
+                <ul>
+          {this.state.books.map(item =>
+            <li key={item.id}>{item.title}-{item.author}</li>
+          )}
+        </ul>
                 </div>
             )
         )
