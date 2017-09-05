@@ -4,6 +4,9 @@
 import React, {Component} from 'react';
 import Menu from './Menu';
 import axios from 'axios';
+import './List.css';
+
+
 
 class BookList extends Component {
 
@@ -41,7 +44,7 @@ class BookList extends Component {
         })
 
             .then(res => {
-                console.log(res.data.data.books);
+                console.log(res);
                 const books = res.data.data.books;
                 console.log(books);
                 this.setState({ books });
@@ -59,7 +62,7 @@ class BookList extends Component {
             (
                 <div>
                     <Menu/>
-                <ul>
+                <ul className="list3a">
           {this.state.books.map(item =>
             <li key={item.id}>{item.title}-{item.author}</li>
           )}
