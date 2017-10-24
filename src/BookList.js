@@ -3,6 +3,7 @@
  */
 import React, {Component} from 'react';
 import Menu from './Menu';
+import App from './App';
 import axios from 'axios';
 import './List.css';
 
@@ -61,7 +62,7 @@ class BookList extends Component {
         return (
             (
                 <div>
-                    <Menu/>
+                   <App/>
                 <ul className="list3a">
           {this.state.books.map(item =>
             <li key={item.id}>{item.title}-{item.author}</li>

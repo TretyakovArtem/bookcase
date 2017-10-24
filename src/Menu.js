@@ -3,22 +3,26 @@
  */
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
-
-
+import {Tabs, Tab} from 'material-ui/Tabs';
 
 
 
 
 class Menu extends Component {
     render() {
+        console.log(this.props.items);
         return (
-            <div>
-                <Link to="/"> Home</Link>
-                <Link to="/about"> About</Link>
-                <Link to="/books/add"> Add</Link>
-                <Link to="/books"> Books</Link>
-
-            </div>
+                <Tabs onChange={this.handleChange}>
+                   {
+                    this.props.items.map(
+                      ({label, path})=><Tab key={label} 
+                                            label={label}
+                                            to={path}
+                                            containerElement={<Link to={path}/>}
+                                             />
+                    )
+                  }
+                </Tabs>  
         );
     }
 }

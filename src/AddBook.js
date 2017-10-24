@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './AddBook.css';
 import Menu from './Menu';
 import axios from 'axios';
+import App from './App';
 
 
 class AddBookForm extends Component {
@@ -80,7 +81,7 @@ class AddBookForm extends Component {
         return (
             (
                 <div>
-                    <Menu/>
+                    <App/>
                 <form onSubmit={this.handleSubmit}>
                     <input
                         type="text"
