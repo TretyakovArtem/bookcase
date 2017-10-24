@@ -1,12 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import './index.css';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import App from './App';
 import About from './About';
 import BookList from './BookList';
 import AddBook from './AddBook';
 import registerServiceWorker from './registerServiceWorker';
+import ReactDOM from 'react-dom';
+
+injectTapEventPlugin();
 
 
 

@@ -1,20 +1,35 @@
 import React, { Component } from 'react';
-
 import './App.css';
-import Menu from './Menu';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
+import ReactDOM from 'react-dom';
 
-import RegistrationForm from './RegistrationForm';
+
 
 
 class App extends Component {
+
+    constructor () {
+        super();
+        this.state = {
+            drawerOpened: false
+        };
+    };
+    _toggleDrawer () {
+        this.setState({
+            drawerOpened: !this.state.drawerOpened
+        });
+    };
+
     render() {
         return (
+            <MuiThemeProvider>
             <div>
-            <Menu/>
-                <div className="container">
-                    <RegistrationForm />
-                </div>
+                <AppBar title="My App" onLeftIconButtonTouchTap={ () => this._toggleDrawer() } />
+                <Drawer open={this.state.drawerOpened} docked ={false} onRequestChange={() => this._toggleDrawer()} />                
             </div>
+            </MuiThemeProvider>
 
         );
     }
