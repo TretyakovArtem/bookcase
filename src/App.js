@@ -30,22 +30,28 @@ injectTapEventPlugin();
             justifyContent:"center"
         }};
 
-        const tabs = [{label:"About", path:"/"}, {label:"Books", path:"/books"}];
+        const tabs = [{label:"About", path:"/", value:1}, {label:"Books", path:"/books", value:2}];
 
 
 
 
 class App extends Component {
 
+        constructor(props) {
+      super(props);
+      this.state = {
+        value: 1,
+      };
+    }
+
 
 
     render() {
-        console.log(tabs)
         return (
             <MuiThemeProvider>
-            <div>
+             <AppBar showMenuIconButton={false}>
                 <Menu items={tabs}/> 
-            </div>
+            </AppBar>  
             </MuiThemeProvider>
 
         );
