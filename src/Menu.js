@@ -4,6 +4,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import {connect} from 'react-redux';
 
 
 
@@ -15,13 +16,13 @@ const styles = {
     marginBottom: 12,
     fontWeight: 400,
   },
-  slide: {
-    padding: 10,
-    width:70
-  },
   tabs: {
-    width:140
-  }
+    alignItems:"left"
+  },
+  slide: {
+    padding: 10
+  },
+  
 };
 const classes = {
   tabLink : {
@@ -36,27 +37,35 @@ const classes = {
 class Menu extends Component {
 
     constructor(props) {
+      console.log(props);
       super(props);
       this.state = {
         value: 1,
       };
-      console.log(this.state.value);
+      console.log(props);
     }
 
 
 
-    handleChange = (value) => {
-      console.log(value);
-        this.setState({
-          value: value,
+    handleChange = (value, props) => {
+
+
+      console.log(this.props);
+        this.props.dispatch({
+          type: "SET_STATE",
+          state: {
+            val: value
+          }
         });
+
     };
 
 
     render() {
+      console.log(this.props);
         return (
          
-                <Tabs value={this.state.value} onChange={this.handleChange} style={styles.tabs}>
+                <Tabs value={this.props.val} onChange={this.handleChange} style={styles.tabs}>
                    {
                     this.props.items.map(
                       ({label, path, value})=><Tab key={label} 
@@ -64,9 +73,7 @@ class Menu extends Component {
                                             to={path}
                                             value={value}
                                             style={styles.slide}
-                                            className={classes.tabLink} 
-                                            component={Link} 
-                                            to={path}
+                                            containerElement={<Link to={path}/>}
                                              />
                     )
                   }
@@ -75,5 +82,10 @@ class Menu extends Component {
     }
 }
 
+function mapStateToProps(state) {
+  return {
+    val: state.get("val")
+  };
+}
 
-export default Menu;
+export default connect(mapStateToProps)(Menu);
