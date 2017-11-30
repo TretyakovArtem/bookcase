@@ -9,18 +9,25 @@ import { Link } from 'react-router-dom';
 import Menu from './Menu';
 import MenuItem from 'material-ui/MenuItem';
 
+var Provider = require("react-redux").Provider;
+var redux = require("redux");
+var reducer = require("./reducer");
+var actions = require("./actions");
+var store = redux.createStore(reducer);
 
-import injectTapEventPlugin from 'react-tap-event-plugin';
 
-injectTapEventPlugin();
 
         const styles = {
           headline: {
             fontSize: 24,
             paddingTop: 16,
             marginBottom: 12,
-            fontWeight: 400,
+            fontWeight: 400
           },
+          header: {
+            width:100,
+            alignItems:"right",
+          }
         };
 
 
@@ -33,24 +40,26 @@ injectTapEventPlugin();
         const tabs = [{label:"About", path:"/", value:1}, {label:"Books", path:"/books", value:2}];
 
 
+store.dispatch({
+  type: "SET_STATE",
+  state: {
+    val: 1
+  }
+});
+
+console.log(store);
+
 
 
 class App extends Component {
 
-        constructor(props) {
-      super(props);
-      this.state = {
-        value: 1,
-      };
-    }
-
-
-
     render() {
         return (
             <MuiThemeProvider>
-             <AppBar showMenuIconButton={false}>
-                <Menu items={tabs}/> 
+             <AppBar showMenuIconButton={false} className="header-title" title="BookCase" titleStyle={styles.header}>
+               <Provider store={store}>
+                   <Menu items={tabs} /> 
+               </Provider>
             </AppBar>  
             </MuiThemeProvider>
 
